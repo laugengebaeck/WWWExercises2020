@@ -17,7 +17,8 @@ Ja, die JSON-Ausgabe für die LZW-Komprimierung ist sinnvoll, da sie neben dem k
 
 ## Teil 4 - Videokodierung
 ### 1 - Interlacing
-### 
+### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcyMjM3ODg4OCwtMTgzMTE1NDY3NF19
+eyJoaXN0b3J5IjpbLTExMTkzNjI5NDMsLTE4MzExNTQ2NzRdfQ
+==
 -->
