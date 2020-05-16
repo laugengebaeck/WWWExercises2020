@@ -51,14 +51,14 @@ a)
  2. Text
  3. Grafiken
 
-b) Insbesondere bei Videos und Grafiken sollte darauf geachtet werden, dass entsprechende Komprimierungsverfahren verwendet werden, sodass keine großen Datenmengen übertragen werden müssen, aber die Qualität für die menschliche Wahrnehmung möglichst unverändert ist.
+b) Insbesondere bei Videos und Grafiken sollte darauf geachtet werden, dass entsprechende Komprimierungsverfahren verwendet werden, sodass keine großen Datenmengen übertragen werden müssen, aber die Qualität für die menschliche Wahrnehmung möglichst unverändert blei.
 
 
 ## Teil 4 - Videokodierung
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTUxNDc2NDAzLDEyODM2Mzg0OTgsLTE5OD
-Y0NTI1MDYsLTUzNTc5OTk2NywxOTAzOTg5ODQ1LC0xMTE5MzYy
-OTQzLC0xODMxMTU0Njc0XX0=
+eyJoaXN0b3J5IjpbLTEwNjY4Njg2MzMsOTUxNDc2NDAzLDEyOD
+M2Mzg0OTgsLTE5ODY0NTI1MDYsLTUzNTc5OTk2NywxOTAzOTg5
+ODQ1LC0xMTE5MzYyOTQzLC0xODMxMTU0Njc0XX0=
 -->
