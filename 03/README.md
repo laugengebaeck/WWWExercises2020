@@ -6,7 +6,7 @@ Ja, die JSON-Ausgabe für die LZW-Komprimierung ist sinnvoll, da sie neben dem k
 
 ## Teil 2 - Grafik- und Audiokodierung
 ### 1 - Additive und subtraktive Farbmischung
-Additive und subtraktive Farbmischung verwenden unterschiedliche 
+Additive und subtraktive Farbmischung verwenden unterschiedliche Ansätze zur Mischung von Farben aus Grundfarben. Bei additiver Farbmischung werden zur Grundfarbe Schwarz andere 
 ### 2 - YUV
 ### 3 - HSV-Farbkodierung
 ### 4 - Chroma-Subsampling
@@ -20,6 +20,6 @@ Additive und subtraktive Farbmischung verwenden unterschiedliche
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU4NjY1NzQ5NiwtMTExOTM2Mjk0MywtMT
-gzMTE1NDY3NF19
+eyJoaXN0b3J5IjpbNDM0OTkwNTQ0LC0xMTE5MzYyOTQzLC0xOD
+MxMTU0Njc0XX0=
 -->
