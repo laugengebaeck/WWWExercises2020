@@ -19,15 +19,16 @@ Alle drei Modelle haben ihre Daseinsberechtigung, da sie für unterschiedliche Z
 Um umrechnen zu können, normieren wir zunächst die RGB-Kodierung auf [0,1] und erhalten ```(R, G, B) = (244/255, 10/17, 14/85)```. Nun können wir die in den Folien angegebenen Formeln anwenden und erhalten:
 ``` 
 m1 = max(R, G, B) = 244/255
-m2 = 14/85
+m2 = min(R, G, B) = 14/85
 delta = m1 - m 2 = 202/255
 
-S = delta/m1 = (202/255)/(244/255) = 101/122 = 0,828 (rund)
+S = delta/m1 = (202/255)/(244/255) 
+  = 101/122 = 0,828 (rund)
 
 V = m1 = 244/255 = 0,957 (rund)
 
-
-H = 60
+H = 60° * ((G-B)/2)
+  = 60° * 18/85
 (da m1 = R ist)
 ```
 ### 4 - Chroma-Subsampling
@@ -41,6 +42,6 @@ H = 60
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg3NDMxODcxOSwtNTM1Nzk5OTY3LDE5MD
-M5ODk4NDUsLTExMTkzNjI5NDMsLTE4MzExNTQ2NzRdfQ==
+eyJoaXN0b3J5IjpbNDE5NjEyMDI3LC01MzU3OTk5NjcsMTkwMz
+k4OTg0NSwtMTExOTM2Mjk0MywtMTgzMTE1NDY3NF19
 -->
