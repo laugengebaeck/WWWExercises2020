@@ -37,9 +37,9 @@ Chroma Subsampling wird verwendet, um die Datenmenge bei der Speicherung von Gra
 
 Die einzelnen Angaben bedeuten:
  - 4:4:4 - kein Subsampling, Farbpixel werden mit der gleichen Auflösung wie Helligkeitspixel gespeichert
- - 4:2:2 - Farbpixel werden mit halbierter Auflösung in horinzontal Richtung (im Vergleich zur Helligkeit) gespeichert. Es werden also jeweils 2 Pixel zusammengefasst.
+ - 4:2:2 - Farbpixel werden mit halbierter Auflösung in horizontaler Richtung (im Vergleich zur Helligkeit) gespeichert. Es werden also jeweils 2 Pixel zusammengefasst.
  - 4:2:0 - Farbpixel werden mit halbierter Auflösung in beiden Richtungen gespeichert. Es werden also jeweils 4 Pixel zusammengefasst.
- - 4:1:1 - Far
+ - 4:1:1 - Farbpixel werden mit einem Viertel der Auflösung in horizontaler Richtung gespeichert. Es werden also jeweils 4 Pixel zusammengefasst.
 
 ### 5 - Abtasttheorem
 
@@ -51,7 +51,7 @@ Die einzelnen Angaben bedeuten:
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM2MDI0NDk4NiwtMTk4NjQ1MjUwNiwtNT
+eyJoaXN0b3J5IjpbMTI4MzYzODQ5OCwtMTk4NjQ1MjUwNiwtNT
 M1Nzk5OTY3LDE5MDM5ODk4NDUsLTExMTkzNjI5NDMsLTE4MzEx
 NTQ2NzRdfQ==
 -->
