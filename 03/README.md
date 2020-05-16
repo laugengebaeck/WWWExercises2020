@@ -61,10 +61,11 @@ b) Insbesondere bei Videos und Grafiken sollte darauf geachtet werden, dass ents
 ## Teil 4 - Videokodierung
 ### 1 - Interlacing
 ### 2 - AV1
-#### a - Ver
+#### a - Verbesserungen
+AV1 unterteilt das Bild in Superblocks, die prediktiv kodiert oder rekursiv in kleinere Blöcke unterteilt werden.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMwNzE5NjAwNSwxNDA1NTU2OTM2LDk1MT
-Q3NjQwMywxMjgzNjM4NDk4LC0xOTg2NDUyNTA2LC01MzU3OTk5
-NjcsMTkwMzk4OTg0NSwtMTExOTM2Mjk0MywtMTgzMTE1NDY3NF
-19
+eyJoaXN0b3J5IjpbMzEzOTM3NTg0LDE0MDU1NTY5MzYsOTUxND
+c2NDAzLDEyODM2Mzg0OTgsLTE5ODY0NTI1MDYsLTUzNTc5OTk2
+NywxOTAzOTg5ODQ1LC0xMTE5MzYyOTQzLC0xODMxMTU0Njc0XX
+0=
 -->
