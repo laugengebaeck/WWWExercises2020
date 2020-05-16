@@ -36,9 +36,8 @@ H = 60° * ((G-B)/2)
 Chroma Subsampling wird verwendet, um die Datenmenge bei der Speicherung von Grafiken zu reduzieren, indem Farbinformationen (im Gegensatz zu Helligkeitsinformationen) mit reduzierter Auflösung gespeichert werden. Dies funktioniert, da das menschliche Auge Farbinformation nur mit reduzierter Auflösung im Vergleich zu Helligkeitsinformation wahrnimmt.
 
 Die einzelnen Angaben bedeuten:
-	-
-	-
-	-
+ - 4:4:4 - 
+
 ### 5 - Abtasttheorem
 
 ## Teil 3 - Multimediale Daten
@@ -49,7 +48,7 @@ Die einzelnen Angaben bedeuten:
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEyMjUwMDUzMSwtMTk4NjQ1MjUwNiwtNT
+eyJoaXN0b3J5IjpbMTk1MjYwMDg4OCwtMTk4NjQ1MjUwNiwtNT
 M1Nzk5OTY3LDE5MDM5ODk4NDUsLTExMTkzNjI5NDMsLTE4MzEx
 NTQ2NzRdfQ==
 -->
