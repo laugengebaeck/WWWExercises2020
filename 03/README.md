@@ -16,6 +16,7 @@ Beim YUV-Farbmodell werden Farben nicht mittels anderer Farben gemischt, sondern
 
 Alle drei Modelle haben ihre Daseinsberechtigung, da sie für unterschiedliche Zwecke verwendet werden. Das RGB-Modell wird zur Speicherung von Grafiken und zur Darstellung auf Bildschirmen benutzt, CMYK dagegen zum Druck, während YUV sich gut zur Farbübertragung bei Analogfernsehen eignet.
 ### 3 - HSV-Farbkodierung
+Um umrechnen zu können, normieren wir zunächst die RGB-Kodierung auf [0,1] und erhalten ``a
 ### 4 - Chroma-Subsampling
 ### 5 - Abtasttheorem
 
@@ -27,6 +28,6 @@ Alle drei Modelle haben ihre Daseinsberechtigung, da sie für unterschiedliche Z
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzNTc5OTk2NywxOTAzOTg5ODQ1LC0xMT
-E5MzYyOTQzLC0xODMxMTU0Njc0XX0=
+eyJoaXN0b3J5IjpbMTMwNjQyNDA5MSwtNTM1Nzk5OTY3LDE5MD
+M5ODk4NDUsLTExMTkzNjI5NDMsLTE4MzExNTQ2NzRdfQ==
 -->
