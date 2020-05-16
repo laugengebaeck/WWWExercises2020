@@ -45,9 +45,10 @@ Die einzelnen Angaben bedeuten:
 
 ## Teil 3 - Multimediale Daten
 ### 1 - Datenmenge
-#### LNCS
-#### Monitor
-###
+#### a - LNCS
+#### b - Monitor
+#### c - Poster
+#### d - Telefonat
 ### 2 - Schul-Cloud
 a)
  1. Video
@@ -61,7 +62,7 @@ b) Insbesondere bei Videos und Grafiken sollte darauf geachtet werden, dass ents
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk3MjE4MTgyMiw5NTE0NzY0MDMsMTI4Mz
+eyJoaXN0b3J5IjpbMTQwNTU1NjkzNiw5NTE0NzY0MDMsMTI4Mz
 YzODQ5OCwtMTk4NjQ1MjUwNiwtNTM1Nzk5OTY3LDE5MDM5ODk4
 NDUsLTExMTkzNjI5NDMsLTE4MzExNTQ2NzRdfQ==
 -->
