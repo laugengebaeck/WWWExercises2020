@@ -50,15 +50,15 @@ a)
  1. Video
  2. Text
  3. Grafiken
- 4. 
-b)
+
+b) Insbesondere bei Videos und Grafiken sollte darauf geachtet werden, dass entsprechende Komprimierungsverfahren verwendet werden, sodass keine großen Datenmengen übertragen werd
 
 
 ## Teil 4 - Videokodierung
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI5NjQwOTU2LDEyODM2Mzg0OTgsLTE5OD
+eyJoaXN0b3J5IjpbMTQzNjE3MjY3LDEyODM2Mzg0OTgsLTE5OD
 Y0NTI1MDYsLTUzNTc5OTk2NywxOTAzOTg5ODQ1LC0xMTE5MzYy
 OTQzLC0xODMxMTU0Njc0XX0=
 -->
