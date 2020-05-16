@@ -32,7 +32,8 @@ H = 60° * ((G-B)/2)
   = 12,706° (rund)
 (da m1 = R)
 ```
-### 4 - Chroma-Subsampling
+### 4 - Chroma Subsampling
+Chroma Subsampling wird verwendet
 ### 5 - Abtasttheorem
 
 ## Teil 3 - Multimediale Daten
@@ -43,7 +44,7 @@ H = 60° * ((G-B)/2)
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI2MTUwNDI2NiwtMTk4NjQ1MjUwNiwtNT
+eyJoaXN0b3J5IjpbMTE5MTYwNjE2MiwtMTk4NjQ1MjUwNiwtNT
 M1Nzk5OTY3LDE5MDM5ODk4NDUsLTExMTkzNjI5NDMsLTE4MzEx
 NTQ2NzRdfQ==
 -->
