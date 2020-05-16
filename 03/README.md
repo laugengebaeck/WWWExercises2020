@@ -62,10 +62,10 @@ b) Insbesondere bei Videos und Grafiken sollte darauf geachtet werden, dass ents
 ### 1 - Interlacing
 ### 2 - AV1
 #### a - Verbesserungen
-AV1 unterteilt das Bild in Superblocks, die prediktiv kodiert oder rekursiv in kleinere Blöcke unterteilt werden.
+AV1 unterteilt das Bild in Superblocks, die prediktiv kodiert oder rekursiv in kleinere Blöcke unterteilt werden. Außerdem verwendet AV1 einen nicht-binären Entropiekodierer anstelle eines binären bei VP9.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzEzOTM3NTg0LDE0MDU1NTY5MzYsOTUxND
-c2NDAzLDEyODM2Mzg0OTgsLTE5ODY0NTI1MDYsLTUzNTc5OTk2
-NywxOTAzOTg5ODQ1LC0xMTE5MzYyOTQzLC0xODMxMTU0Njc0XX
-0=
+eyJoaXN0b3J5IjpbLTExNjA4OTMwODYsMTQwNTU1NjkzNiw5NT
+E0NzY0MDMsMTI4MzYzODQ5OCwtMTk4NjQ1MjUwNiwtNTM1Nzk5
+OTY3LDE5MDM5ODk4NDUsLTExMTkzNjI5NDMsLTE4MzExNTQ2Nz
+RdfQ==
 -->
