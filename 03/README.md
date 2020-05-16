@@ -14,7 +14,7 @@ Bei subtraktiver Farbmischung dagegen werden von der Grundfarbe *Weiß* andere F
 ### 2 - YUV
 Beim YUV-Farbmodell werden Farben nicht mittels anderer Farben gemischt, sondern in einen Helligkeitsanteil (Luminanz) und einen Farbanteil (Chrominanz) zerlegt. 
 
-Alle drei Modelle haben ihre Daseinsberechtigung, da sie für unterschiedliche Zwecke verwendet werden. Das RGB-Modell wird zur Speicherung von Grafiken und zur Darstellung auf Bildschirmen benutzt, CMYK dagegen zum Druck, während YUV sich gut zur Farbübertragung bei Analogfernsehen eignet.
+Alle drei Modelle haben ihre Daseinsberechtigung, da sie für unterschiedliche Zwecke verwendet werden. Das RGB-Modell wird zur Speicherung von Grafiken und zur Darstellung auf Bildschirmen benutzt, CMYK dagegen zum Druck, während YUV sich gut zur Farbübertragung bei Analogfernsehen bzw. als YCbCr für JPEG-Komprimierung benutzt wird eignet.
 ### 3 - HSV-Farbkodierung
 Um umrechnen zu können, normieren wir zunächst die RGB-Kodierung auf [0,1] und erhalten ```(R, G, B) = (244/255, 10/17, 14/85)```. Nun können wir die in den Folien angegebenen Formeln anwenden und erhalten:
 ``` 
@@ -43,6 +43,7 @@ H = 60° * ((G-B)/2)
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5ODY0NTI1MDYsLTUzNTc5OTk2NywxOT
-AzOTg5ODQ1LC0xMTE5MzYyOTQzLC0xODMxMTU0Njc0XX0=
+eyJoaXN0b3J5IjpbLTI2MTUwNDI2NiwtMTk4NjQ1MjUwNiwtNT
+M1Nzk5OTY3LDE5MDM5ODk4NDUsLTExMTkzNjI5NDMsLTE4MzEx
+NTQ2NzRdfQ==
 -->
