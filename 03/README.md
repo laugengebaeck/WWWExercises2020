@@ -63,10 +63,11 @@ b) Insbesondere bei Videos und Grafiken sollte darauf geachtet werden, dass ents
 ### 2 - AV1
 #### a - Verbesserungen
 AV1 unterteilt das Bild in Superblocks, die prediktiv kodiert oder rekursiv in kleinere Blöcke unterteilt werden. Außerdem verwendet AV1 einen nicht-binären Entropiekodierer anstelle eines binären bei VP9.
-
+#### b - Effizienz
+Laut [https://de.wikipedia.org/wiki/AOMedia_Video_1](https://de.wikipedia.org/wiki/AOMedia_Video_1) und [https://www.texpion.com/2018/07/av1-vs-vp9-vs-avc-h264-vs-hevc-h265-2-psnr.html](https://www.texpion.com/2018/07/av1-vs-vp9-vs-avc-h264-vs-hevc-h265-2-psnr.html) liegt die Speicherplatzausnutzung ungefähr auf dem Niveau von H.265
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExODgxNDAyNzIsLTExNjA4OTMwODYsMT
-QwNTU1NjkzNiw5NTE0NzY0MDMsMTI4MzYzODQ5OCwtMTk4NjQ1
-MjUwNiwtNTM1Nzk5OTY3LDE5MDM5ODk4NDUsLTExMTkzNjI5ND
-MsLTE4MzExNTQ2NzRdfQ==
+eyJoaXN0b3J5IjpbLTU4NDI4NzkxMiwtMTE2MDg5MzA4NiwxND
+A1NTU2OTM2LDk1MTQ3NjQwMywxMjgzNjM4NDk4LC0xOTg2NDUy
+NTA2LC01MzU3OTk5NjcsMTkwMzk4OTg0NSwtMTExOTM2Mjk0My
+wtMTgzMTE1NDY3NF19
 -->
