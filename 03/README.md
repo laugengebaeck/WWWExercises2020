@@ -33,7 +33,7 @@ H = 60° * ((G-B)/2)
 (da m1 = R)
 ```
 ### 4 - Chroma Subsampling
-Chroma Subsampling wird verwendet, um die Datenmenge bei der Speicherung von Grafiken zu reduzieren, indem Farbinformationen (im Gegensatz zu Helligkeitsinformationen) nur mit reduzierter Auflösung gespeichert werden. Dies funktioniert, da das menschliche Auge Farbinformation nur mit reduzierter Auflösung im Verglei
+Chroma Subsampling wird verwendet, um die Datenmenge bei der Speicherung von Grafiken zu reduzieren, indem Farbinformationen (im Gegensatz zu Helligkeitsinformationen) mit reduzierter Auflösung gespeichert werden. Dies funktioniert, da das menschliche Auge Farbinformation nur mit reduzierter Auflösung im Vergleich zu Helligkeitsinformation wahrnimmt.
 ### 5 - Abtasttheorem
 
 ## Teil 3 - Multimediale Daten
@@ -44,7 +44,7 @@ Chroma Subsampling wird verwendet, um die Datenmenge bei der Speicherung von Gra
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NjUwNzU1MDcsLTE5ODY0NTI1MDYsLT
+eyJoaXN0b3J5IjpbLTE5NTQ2NjMzNTIsLTE5ODY0NTI1MDYsLT
 UzNTc5OTk2NywxOTAzOTg5ODQ1LC0xMTE5MzYyOTQzLC0xODMx
 MTU0Njc0XX0=
 -->
