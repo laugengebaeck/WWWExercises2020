@@ -29,7 +29,8 @@ V = m1 = 244/255 = 0,957 (rund)
 
 H = 60° * ((G-B)/2)
   = 60° * 18/85
-(da m1 = R ist)
+  = 12,706° (rund)
+(da m1 = R)
 ```
 ### 4 - Chroma-Subsampling
 ### 5 - Abtasttheorem
@@ -42,6 +43,6 @@ H = 60° * ((G-B)/2)
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDE5NjEyMDI3LC01MzU3OTk5NjcsMTkwMz
-k4OTg0NSwtMTExOTM2Mjk0MywtMTgzMTE1NDY3NF19
+eyJoaXN0b3J5IjpbLTE5ODY0NTI1MDYsLTUzNTc5OTk2NywxOT
+AzOTg5ODQ1LC0xMTE5MzYyOTQzLC0xODMxMTU0Njc0XX0=
 -->
