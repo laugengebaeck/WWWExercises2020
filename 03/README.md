@@ -45,20 +45,23 @@ Die einzelnen Angaben bedeuten:
 
 ## Teil 3 - Multimediale Daten
 ### 1 - Datenmenge
+#### LNCS
+#### Monitor
+###
 ### 2 - Schul-Cloud
 a)
  1. Video
  2. Text
  3. Grafiken
 
-b) Insbesondere bei Videos und Grafiken sollte darauf geachtet werden, dass entsprechende Komprimierungsverfahren verwendet werden, sodass keine großen Datenmengen übertragen werden müssen, aber die Qualität für die menschliche Wahrnehmung möglichst unverändert blei.
+b) Insbesondere bei Videos und Grafiken sollte darauf geachtet werden, dass entsprechende Komprimierungsverfahren verwendet werden, sodass keine großen Datenmengen übertragen werden müssen, aber die Qualität für die menschliche Wahrnehmung möglichst unverändert bleibt.
 
 
 ## Teil 4 - Videokodierung
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNjY4Njg2MzMsOTUxNDc2NDAzLDEyOD
-M2Mzg0OTgsLTE5ODY0NTI1MDYsLTUzNTc5OTk2NywxOTAzOTg5
-ODQ1LC0xMTE5MzYyOTQzLC0xODMxMTU0Njc0XX0=
+eyJoaXN0b3J5IjpbMTk3MjE4MTgyMiw5NTE0NzY0MDMsMTI4Mz
+YzODQ5OCwtMTk4NjQ1MjUwNiwtNTM1Nzk5OTY3LDE5MDM5ODk4
+NDUsLTExMTkzNjI5NDMsLTE4MzExNTQ2NzRdfQ==
 -->
