@@ -61,8 +61,10 @@ b) Insbesondere bei Videos und Grafiken sollte darauf geachtet werden, dass ents
 ## Teil 4 - Videokodierung
 ### 1 - Interlacing
 ### 2 - AV1
+#### a - Ver
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQwNTU1NjkzNiw5NTE0NzY0MDMsMTI4Mz
-YzODQ5OCwtMTk4NjQ1MjUwNiwtNTM1Nzk5OTY3LDE5MDM5ODk4
-NDUsLTExMTkzNjI5NDMsLTE4MzExNTQ2NzRdfQ==
+eyJoaXN0b3J5IjpbMTMwNzE5NjAwNSwxNDA1NTU2OTM2LDk1MT
+Q3NjQwMywxMjgzNjM4NDk4LC0xOTg2NDUyNTA2LC01MzU3OTk5
+NjcsMTkwMzk4OTg0NSwtMTExOTM2Mjk0MywtMTgzMTE1NDY3NF
+19
 -->
