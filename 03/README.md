@@ -12,7 +12,7 @@ Bei additiver Farbmischung werden zur Grundfarbe *Schwarz* andere Farben hinzuge
 
 Bei subtraktiver Farbmischung dagegen werden von der Grundfarbe *Weiß* andere Farben abgezogen (also subtrahiert). Dieser Ansatz ist beim *CMY(K)-Farbmodell* zu finden, bei dem Farbpigmente der Grundfarben Cyan, Magenta, Yellow/Gelb und gegebenenfalls Schwarz auf eine weiße Oberfläche aufgetragen werden.
 ### 2 - YUV
-Beim YUV-Farbmodell werden Farben nicht mittels anderer Farben gemischt, sondern in einen Helligkeitsanteil (Luminanz) und einen Farbanteil (Chrominanz) zerlegt.
+Beim YUV-Farbmodell werden Farben nicht mittels anderer Farben gemischt, sondern in einen Helligkeitsanteil (Luminanz) und einen Farbanteil (Chrominanz) zerlegt. Alle drei Modelle haben ihre Daseins
 ### 3 - HSV-Farbkodierung
 ### 4 - Chroma-Subsampling
 ### 5 - Abtasttheorem
@@ -25,6 +25,6 @@ Beim YUV-Farbmodell werden Farben nicht mittels anderer Farben gemischt, sondern
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MTM2NTQ3NjYsLTExMTkzNjI5NDMsLT
-E4MzExNTQ2NzRdfQ==
+eyJoaXN0b3J5IjpbNTI5Mjk4MDk1LC0xMTE5MzYyOTQzLC0xOD
+MxMTU0Njc0XX0=
 -->
