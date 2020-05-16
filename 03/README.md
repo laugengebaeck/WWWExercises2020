@@ -18,10 +18,17 @@ Alle drei Modelle haben ihre Daseinsberechtigung, da sie für unterschiedliche Z
 ### 3 - HSV-Farbkodierung
 Um umrechnen zu können, normieren wir zunächst die RGB-Kodierung auf [0,1] und erhalten ```(R, G, B) = (244/255, 10/17, 14/85)```. Nun können wir die in den Folien angegebenen Formeln anwenden und erhalten:
 ``` 
-m1 = 244/255
+m1 = max(R, G, B) = 244/255
 m2 = 14/85
 delta = m1 - m 2 = 202/255
-S = delta/m1 = (202/255)/(244/255) = 1
+
+S = delta/m1 = (202/255)/(244/255) = 101/122 = 0,828 (rund)
+
+V = m1 = 244/255 = 0,957 (rund)
+
+
+H = 60
+(da m1 = R ist)
 ```
 ### 4 - Chroma-Subsampling
 ### 5 - Abtasttheorem
@@ -34,6 +41,6 @@ S = delta/m1 = (202/255)/(244/255) = 1
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDY4MTkyMDkzLC01MzU3OTk5NjcsMTkwMz
-k4OTg0NSwtMTExOTM2Mjk0MywtMTgzMTE1NDY3NF19
+eyJoaXN0b3J5IjpbMTg3NDMxODcxOSwtNTM1Nzk5OTY3LDE5MD
+M5ODk4NDUsLTExMTkzNjI5NDMsLTE4MzExNTQ2NzRdfQ==
 -->
