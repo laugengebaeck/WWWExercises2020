@@ -6,6 +6,7 @@ Ja, die JSON-Ausgabe für die LZW-Komprimierung ist sinnvoll, da sie neben dem k
 
 ## Teil 2 - Grafik- und Audiokodierung
 ### 1 - Additive und subtraktive Farbmischung
+Additive und subtraktive Farbmischung verwenden unterschiedliche 
 ### 2 - YUV
 ### 3 - HSV-Farbkodierung
 ### 4 - Chroma-Subsampling
@@ -19,6 +20,6 @@ Ja, die JSON-Ausgabe für die LZW-Komprimierung ist sinnvoll, da sie neben dem k
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMTkzNjI5NDMsLTE4MzExNTQ2NzRdfQ
-==
+eyJoaXN0b3J5IjpbMTU4NjY1NzQ5NiwtMTExOTM2Mjk0MywtMT
+gzMTE1NDY3NF19
 -->
