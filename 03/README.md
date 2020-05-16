@@ -10,7 +10,7 @@ Additive und subtraktive Farbmischung verwenden unterschiedliche Ansätze zur Mi
 
 Bei additiver Farbmischung werden zur Grundfarbe *Schwarz* andere Farben hinzugemischt (also addiert). Dieses Vorgehen findet man z. B. beim *RGB-Farbmodell*, bei dem Farben aus unterschiedlichen Anteilen der drei selbstleuchtenden Grundfarben Rot, Grün und Blau gemischt werden.
 
-Bei subtraktiver Farbmischung dagegen werden von der Grundfarbe *Weiß* andere Farben abgezogen (also subtrahiert). Dieser Ansatz ist beim *CMY(K)-Farbmodell* zu finden, bei dem Farbpigmente der Grundfarben Cyan, Magenta
+Bei subtraktiver Farbmischung dagegen werden von der Grundfarbe *Weiß* andere Farben abgezogen (also subtrahiert). Dieser Ansatz ist beim *CMY(K)-Farbmodell* zu finden, bei dem Farbpigmente der Grundfarben Cyan, Magenta, Yellow/Gelb und gegebenenfalls Schwarz auf eine weiße Oberfläche aufgetragen werden.
 ### 2 - YUV
 ### 3 - HSV-Farbkodierung
 ### 4 - Chroma-Subsampling
@@ -24,6 +24,6 @@ Bei subtraktiver Farbmischung dagegen werden von der Grundfarbe *Weiß* andere F
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjYxNjc2NjE1LC0xMTE5MzYyOTQzLC0xOD
+eyJoaXN0b3J5IjpbNTYzOTUyNTg1LC0xMTE5MzYyOTQzLC0xOD
 MxMTU0Njc0XX0=
 -->
