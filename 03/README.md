@@ -46,12 +46,16 @@ Die einzelnen Angaben bedeuten:
 ## Teil 3 - Multimediale Daten
 ### 1 - Datenmenge
 ### 2 - Schul-Cloud
+a)
+ 1. Video
+ 2. Text
+ 3. Grafiken
 
 ## Teil 4 - Videokodierung
 ### 1 - Interlacing
 ### 2 - AV1
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI4MzYzODQ5OCwtMTk4NjQ1MjUwNiwtNT
-M1Nzk5OTY3LDE5MDM5ODk4NDUsLTExMTkzNjI5NDMsLTE4MzEx
-NTQ2NzRdfQ==
+eyJoaXN0b3J5IjpbODQ0MzMxMjMxLDEyODM2Mzg0OTgsLTE5OD
+Y0NTI1MDYsLTUzNTc5OTk2NywxOTAzOTg5ODQ1LC0xMTE5MzYy
+OTQzLC0xODMxMTU0Njc0XX0=
 -->
