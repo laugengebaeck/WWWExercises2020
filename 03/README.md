@@ -43,12 +43,28 @@ Die einzelnen Angaben bedeuten:
 
 ### 5 - Abtasttheorem
 
+a)
+![Abtasttheorem erfüllt](abtast_ok.png)
+
+b)
+![Abtasttheorem verletzt](abtast_notok.png)
+
+c)
+![Rekonstruierter Ton](abtast_reconstruct.png)
+
 ## Teil 3 - Multimediale Daten
 ### 1 - Datenmenge
 #### a - LNCS
+Durch Nachzählen in einem [Beispiel-LNCS-Paper](https://latextemplates.github.io/LNCS/paper.pdf) kam ich auf eine Zeilenanzahl pro Seite von ungefähr 35. UTF-8-Zeichen können bis zu 4 Bytes umfassen, aber wir gehen davon aus, dass nahezu alle ASCII-Zeichen sind (da es sich um eine Textseite handelt) und rechnen mit 1 Byte pro Zeichen.
+
+Nun enthält eine Seite rund ```84 * 35 = 2940``` Zeichen, von denen jedes 1 Byte, also 8 Bit benötigt. Also benötigt die Seite eine Datenmenge von ```2940 * 8 = 23520``` Bit.
 #### b - Monitor
+Wir gehen davon aus, dass der Monitor (wie allgemein üblich) das Bild mittels des RGB-Farbmodells darstellt und für jede Farbkomponente 8 Bit verwendet. Dann ergibt sich eine Datenmenge von ```3840 Pixel * 2160 Pixel * 60 1/s * 3 Farbkomponenten/Pixel * 8 Bit/Komponente =  11 943 936 000 Bit/s```.
 #### c - Poster
+Ein Din-A1-Poster ist 594 mm x 841 mm groß. Da ```1 Zoll = 25,4 mm```, ergibt sich eine Pixeldichte in Pixel pro mm von ```300 dpi / 25,4 = 11,8 Pixel/mm (rund)```. Folglich hat das Poster eine Auflösung von  ```7009 * 9924``` Pixel, da ```594 mm * 11,8 Pixel/mm = 7009 (rund)``` und ```841 mm * 11,8 Pixel/mm = 9924 (rund)```. Das ergibt insgesamt ```7009 * 9924 = 69 557 316``` Pixel. Jedes dieser benötigt ```12 Bit/Farbkomponente * 4 Komponenten = 48 Bit```. Insgesamt werden also ```69 557 316 Pixel * 48 Bit/Pixel = 3 338 751 168 Bit``` als Datenmenge benötigt.
 #### d - Telefonat
+14 Minuten sind genau ```14 * 60 = 840``` Sekunden. Mit den in der Aufgabe gegebenen Daten und dem Wissen, dass Telefone Audiodaten nur mit einem Kanal übertragen, ergibt sich:
+```840 s * 8000 1/s * 8 Bit * 1 = 53 760 000 Bit``` als Datenmenge.
 ### 2 - Schul-Cloud
 a)
  1. Video
@@ -60,14 +76,10 @@ b) Insbesondere bei Videos und Grafiken sollte darauf geachtet werden, dass ents
 
 ## Teil 4 - Videokodierung
 ### 1 - Interlacing
+![Interlacing-Beispiel](interlacing.png)
+In obigem [Beispiel]((https://www.youtube.com/watch?v=uFtHTHkV0kY)) ist Interlacing sehr gut sichtbar. So verschwimmen die eigentlich geraden Linien auf der Fassade des Gebäudes im Hintergrund durch das Zeilenflimmern. Gut erkennbar wird Interlacing beispielsweise, wenn eine Kante genau zwischen zwei Bildzeilen fällt, also nur in einem Teilbild sichtbar ist, und es dadurch zu Zeilenflimmern kommt. Dies ist noch ausgeprägter, wenn das aufgenommene Bild detailreich und scharf ist.
 ### 2 - AV1
 #### a - Verbesserungen
 AV1 unterteilt das Bild in Superblocks, die prediktiv kodiert oder rekursiv in kleinere Blöcke unterteilt werden. Außerdem verwendet AV1 einen nicht-binären Entropiekodierer anstelle eines binären bei VP9.
 #### b - Effizienz
 Laut [https://de.wikipedia.org/wiki/AOMedia_Video_1](https://de.wikipedia.org/wiki/AOMedia_Video_1) und [https://www.texpion.com/2018/07/av1-vs-vp9-vs-avc-h264-vs-hevc-h265-2-psnr.html](https://www.texpion.com/2018/07/av1-vs-vp9-vs-avc-h264-vs-hevc-h265-2-psnr.html) liegt die Speicherplatzausnutzung ungefähr auf dem Niveau von H.265 und ist teilweise sogar besser. Die Effizienzsteigerung beträgt somit zwischen 20 % (= die Effizienzsteigerung bei H.265) und (nach obiger Quelle) bis zu 50 %.
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkxOTc5NzYxOCwtMTE2MDg5MzA4NiwxND
-A1NTU2OTM2LDk1MTQ3NjQwMywxMjgzNjM4NDk4LC0xOTg2NDUy
-NTA2LC01MzU3OTk5NjcsMTkwMzk4OTg0NSwtMTExOTM2Mjk0My
-wtMTgzMTE1NDY3NF19
--->
