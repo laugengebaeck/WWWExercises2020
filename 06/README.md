@@ -20,9 +20,25 @@
 
 #### a - Neighbor Discovery Protocol
 
+NDP übernimmt die Funktion des Address Resolution Protocol (ARP) bei IPv6. Es ist also für die Auflösung von IPv6-Adressen zu MAC-Adressen verantwortlich.
+
 #### b - Unterschiede IPv4 und NDP
 
+* NDP führt die Adressauflösung mittels ICMP auf dem Internet Layer statt wie ARP auf dem Link Layer durch. Dadurch ist es weniger vom Medium abhängig.
+* IPv6-Router können über NDP eine für den gesamten Link (also alle Hosts) geltende MTU bekanntgeben. Bei ARP ist das nicht möglich.
+* Mittels Router-Advertisement-Nachrichten kann NDP eine automatische Adresskonfiguration durchführen (ähnlich wie DHCP bei IPv4).
+
 ### 5 - Netzmaske und IP-Adressen
+
+Die Netzmaske ist hier 255.255.192.0. Das Netz 249.151.128.0/18 umfasst alle IP-Adressen, bei denen die ersten 18 Bits genau den ersten 18 Bits von 249.151.128.0 entsprechen. Die ersten 16 Bit (also 249.151) stimmen bei 249.151.101.89 und 249.151.201.83 offensichtlich jeweils überein. Nun schreiben wir das dritte Byte der IPs jeweils in binär:
+
+```python
+128 = 10000000
+101 = 01100101
+201 = 11001001
+```
+
+Wie man sieht, unterscheiden sich bei beiden IPs jeweils die ersten zwei Bit des dritten Bytes vom Netz. Folglich ist keine der beiden IP-Adressen in diesem Netz enthalten.
 
 ### 6 - IP-ID
 
@@ -42,6 +58,8 @@ Der von Traceroute ermittelte Weg muss nicht immer der tatsächliche sein. Dies 
 (Eigentlich verwendet nur Windows-Traceroute ICMP. Linux-Traceroute benutzt UDP, erhält aber als Antwort auch ICMP-Pakete.)
 
 ### 8 - Fragmentierung und MTU Path Discovery
+
+TODO
 
 ### 9 - Verkürzung IP-Adresse
 
