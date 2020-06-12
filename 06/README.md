@@ -6,15 +6,74 @@
 
 ### 1 - Dijkstra-Algorithmus
 
+![Routingtabelle für Knoten D](dijkstra.png)
+
 ### 2 - Distanzvektor-Routing
+
+Wir addieren zunächst zu den Distanzvektoren von B, D und E jeweils die Verzögerung von C zum jeweiligen Knoten und erhalten
+
+```python
+B: (9, 6, 14, 18, 11, 8)
+D: (10, 15, 9, 3, 11, 13)
+E: (12, 11, 8, 14, 5, 7)
+```
+
+Für C ist die Distanz nun offensichtlich 0 und für alle anderen Knoten nehmen wir jeweils das Minimum der Distanz in den obigen Vektoren (und den entsprechenden Next Hop):
+
+Knoten | Next Hop | Distanz
+------ | -------- | ------
+A | B | 9
+B | B | 6
+C | - | 0
+D | D | 3
+E | E | 5
+F | E | 7
 
 ## Teil II - Recherche-Aufgaben
 
 ### 1 - DHCP
 
+Benötigt ein Client eine neue IP-Adresse, so schickt er eine DHCPDISCOVER-Nachricht mit seiner MAC-Adresse als Broadcast an alle DHCP-Server in der Broadcast Domain. Nun antworten die DHCP-Server mit Vorschlägen für eine IP-Adresse per DHCPOFFER. Nun kann der Client unter den eingegangenen Angeboten wählen und anschließend den entsprechenden Server wieder per Broadcast mit einem DHCPREQUEST kontaktieren. Für alle anderen Server ist dies als Absage für ihre Angebote zu werten. Nun bestätigt der Server entweder per DHCPACK die gewählte IP-Adresse oder zieht sein Angebot per DHCPNAK zurück.  Üblicherweise prüft der Client nun per ARP-Request, ob diese IP-Adresse nicht doch verwendet wird. In diesem Fall würde er die IP-Adresse per DHCPDECLINE zurückweisen.
+
+![Ablauf von DHCPv4](dhcp.png)
+
 ### 2 - Informationsaustausch bei DHCPv4
 
+Die einzelnen Nachrichten bei der DHCP-Adresszuweisung enthalten folgende Informationen:
+
+1. DHCPDISCOVER
+   * Absender: 0.0.0.0 (da noch keine eigene IP-Adresse vorhanden)
+   * Zieladresse: 255.255.255.255 (Broadcast)
+   * MAC-Adresse des Clients
+   * optional Vorschläge für bevorzugte IP-Adressen oder Leasedauer
+2. DHCPOFFER
+   * Broadcast an 255.255.255.255 *oder* Unicast an vorgeschlagene IP-Adresse und MAC-Adresse des Clients
+   * Vorschläge für IP-Adresse des Clients ('yiaddr'-Feld)
+   * Server-Identifier
+   * weitere Konfigurationsparameter
+3. DHCPREQUEST
+   * Broadcast
+   * Server-Identifier des angenommenen Angebots
+   * angenommene IP-Adresse
+   * optional vom Client gewünschte Konfigurationsparameter
+   * optional Client-Identifier für die weitere Kommunikation (sonst wird MAC-Adresse genutzt)
+4. DHCPACK
+   * Bestätigung der IP-Adresse
+   * enthält erneut die IP-Adresse sowie weitere Konfigurationsparameter
+   * Client-Identifier
+   * Leasedauer
+5. DHCPNAK
+   * Ablehnung der IP-Adresse durch den Server
+6. DHCPDECLINE
+   * Ablehnung der IP-Adresse durch den Client
+
 ### 3 - DHCPv6 und Router Advertisement
+
+Router Advertisement ist das für IPv6 bevorzugte Pendant zu DHCP. Hierbei weist sich ein Host zunächst selbst eine link-lokale IP zu, um mit dem Router kommunizieren zu können. Anschließend kann er über NDP die Router in seinem Netzwerksegment finden, auch bekannt als Router Solicitation (per Anfrage an eine spezielle Multicast-Adresse). Nun versendet der Router per Router Advertisement Informationen zu den verfügbaren Adressbereichen für Unicast-Adressen und der Host weist sich selbst eine IP zu. Dabei werden Doppelvergaben über Duplicate Address Detection verhindert.
+
+DHCPv6 funktioniert im wesentlichen wie DHCP für IPv4. Jedoch können zusätzlich Informationen z.B. über NTP- und SIP-Dienste mitgeteilt werden und DHCPv6 auf bestimmte Clients eingeschränkt werden. Außerdem ist es möglich, Router Advertisement für die eigentliche Adressvergabe zu integrieren.
+
+Der wesentliche Unterschied zwischen beiden Protokollen ist, dass bei DHCPv6 die Adressvergabe "stateful" durch den Router erfolgt, bei Router Advertisement aber "stateless" durch den Host selbst. Außerdem können über Router Advertisement keine der oben erwähnten Zusatzinformationen mitgeteilt werden.
 
 ### 4 - Neighbor Discovery
 
@@ -59,7 +118,9 @@ Der von Traceroute ermittelte Weg muss nicht immer der tatsächliche sein. Dies 
 
 ### 8 - Fragmentierung und MTU Path Discovery
 
-TODO
+Bei IPv4 erfolgt die Fragmentierung durch die Router auf dem Pfad zum Zielrechner. Stellt ein Router fest, dass das Paket für das nächste Teilnetz auf dem Pfad zu groß ist (dessen MTU überschreitet), kann er es in zwei (oder mehr) Fragmente aufteilen. Dabei werden die Nutzdaten an einer 64-Bit-Grenze aufgeteilt und die Headerdaten in die neuen Pakete kopiert. Außerdem wird beim ersten Fragment das "More Fragments"-Flag im Header gesetzt und die Fragment-Offset- sowie Längen-Felder entsprechend angepasst. Der Empfänger kann dann alle Fragmente mit der gleichen IP-ID wieder zusammensetzen, wobei über den Fragment Offset die Reihenfolge bestimmt wird.
+
+Bei IPv6 erfolgt die Fragmentierung nun nicht mehr durch die Router, sondern durch den Sender. Sollte ein Router feststellen, dass ein Paket die MTU überschreitet, fordert er den Sender per ICMP auf, kleinere Pakete zu schicken. Damit der Sender nun Pakete mit maximal möglicher Größe verschicken kann, sollte er vor dem Senden eine MTU Path Discovery durchführen. Dabei wird zunächst ein Paket, dessen Größe der lokalen MTU entspricht, gesendet. Wird dieses von einem Router zurückgewiesen, muss die Größe entsprechend auf dessen MTU reduziert werden. Dies erfolgt so lange, bis das Paket den Sender erreicht, denn dann hat man die richtige MTU gefunden.
 
 ### 9 - Verkürzung IP-Adresse
 
