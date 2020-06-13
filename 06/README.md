@@ -128,6 +128,12 @@ Gekürzt erhalten wir 0:0:500::400a:9999.
 
 ## Teil III - Routing in der Praxis
 
-### 3 - Flag fd60:XX::2
+### 3 - Flag 10.60.110.2 und fd60:110::2
+
+26d3d96d6c18a789e34b7875d5b09b7774154a1b5c36fe6390b2a6ae5cbf3b14
 
 ### 6 - Bonus-Flags
+
+![Die erste Bonus-Flag (wie vorhersehbar ;)](flag01.png)
+
+![Die zweite Bonus-Flag](hacker.jpg)
