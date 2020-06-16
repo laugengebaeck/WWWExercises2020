@@ -154,8 +154,18 @@ e38ec2c57bd84fba0a455793c01f0e017ba9e86cc758dd6cd895c99e5438f2fb
 
 ### 6 - Bonus-Flags
 
-![Die erste Bonus-Flag (wie vorhersehbar ;)](flag01.png)
+#### Flag im Sourcecode von <http://10.60.110.2/index.html>
 
-![Die zweite Bonus-Flag](hacker.jpg)
+![Bonus-Flag im HTML-Source](flag01.png)
 
-![Die dritte Bonus-Flag (IPv6-Version)](flag02.png)
+#### Flag in <http://10.60.110.2/hacker.jpg>
+
+![Bonus-Flag in hacker.jpg](hacker.jpg)
+
+#### Flag im Response-Header von <http://[fd60:110::2]/index.html>
+
+![Bonus-Flag im Response-Header](flag02.png)
+
+#### Flag in <http://10.60.110.2/rainbow.webm> bei 0:44
+
+![Bonus-Flag in rainbow.webm](flag03.png)
