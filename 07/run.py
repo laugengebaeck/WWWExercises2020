@@ -1,11 +1,13 @@
 import argparse
 import random
 import socket, struct
-import array
-import codecs
+import array, time
+import json
+import hashlib
+
+MAT_NR = 801005
 
 # TCP flag constants
-TCP_FLAGS_RSV = (1 << 9)
 TCP_FLAGS_NOC = (1 << 8)
 TCP_FLAGS_CWR = (1 << 7)
 TCP_FLAGS_ECN = (1 << 6)
@@ -28,28 +30,29 @@ def chksum(packet):
     return (~res) & 0xffff
 
 class TCPPacket:
-    def __init__(self, src_ip, src_port, dst_ip, dst_port, data, flags, seqnum = 0, acknum = 0):
+    def __init__(self, src_ip, src_port, dst_ip, dst_port, data, flags, seqnum = 0, acknum = 0, raw = False, dofs = 0):
         self.src_ip = src_ip
         self.src_port = src_port
         self.dst_ip = dst_ip
         self.dst_port = dst_port
-        self.data = str.encode(data, 'utf-8')
+        self.data = data if raw else str.encode(data, 'utf-8')
         self.flags = flags
         self.seqnum = seqnum
         self.acknum = acknum
+        self.dofs = dofs # for reserved flags
 
     def build(self):
         packet = struct.pack(
-            '!HHIIBBHHH',
-            self.src_port,  # Source Port
-            self.dst_port,  # Destination Port
-            self.seqnum,    # Sequence Number
-            self.acknum,    # Acknoledgement Number
-            5 << 4,         # Data Offset
-            self.flags,     # Flags
-            8192,           # Window
-            0,              # Checksum (initial value)
-            0               # Urgent pointer
+            '!HHLLBBHHH',
+            self.src_port,        # Source Port
+            self.dst_port,        # Destination Port
+            self.seqnum,          # Sequence Number
+            self.acknum,          # Acknowledgement Number
+            (5 << 4) + self.dofs, # Data Offset
+            self.flags,           # Flags
+            8192,                 # Window
+            0,                    # Checksum (initial value)
+            0                     # Urgent pointer
         ) + self.data
 
         pseudo_hdr = struct.pack(
@@ -68,10 +71,11 @@ class TCPPacket:
 
 
 class IPPacket:
-    def __init__(self, src_ip, dst_ip, data):
+    def __init__(self, src_ip, dst_ip, data, ip_id = 1):
         self.src_ip = src_ip
         self.dst_ip = dst_ip
         self.data = data
+        self.ip_id = ip_id
 
     def build(self):
         header = struct.pack(
@@ -79,7 +83,7 @@ class IPPacket:
             69,                                   # Version and IHL (=0x45)
             0,                                    # Type of Service
             20,                                   # Total Length
-            1,                                    # IP-ID
+            self.ip_id,                           # IP-ID
             0,                                    # Fragment Offset
             64,                                   # TTL
             socket.IPPROTO_TCP,                   # Protocol
@@ -94,33 +98,120 @@ class IPPacket:
 
         return header + self.data
 
+def save_flags(syn_ack_flag, matriculation_flag, fin_flag):
+    code_dict = {
+        "matriculation_number" : matriculation_flag,
+        "fin" : fin_flag,
+        "synack": syn_ack_flag,
+        "hours" : 7
+    }
+    fp = open('codes.json', 'w')
+    fp.write(json.dumps(code_dict))
+    fp.close()
+
+def receive_and_acknowledge(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum, is_handshake):
+    while True:
+        data_packet = sock.recvfrom(2000)[0]
+        pack_dst = int.from_bytes(data_packet[22:24], byteorder='big')
+        pack_src = int.from_bytes(data_packet[20:22], byteorder='big')
+        if pack_dst != src_port or pack_src != dst_port:
+            continue
+        acknum = int.from_bytes(data_packet[28:32], byteorder='big')
+        if is_handshake:
+            seqnum = int.from_bytes(data_packet[24:28], byteorder='big') + 1
+        else:
+            seqnum += len(data_packet[40:])
+        ip_id = int.from_bytes(data_packet[4:6], byteorder='big')
+        ack_packet_tcp = TCPPacket(src_ip, src_port, dst_ip, dst_port, '', TCP_FLAGS_ACK, acknum, seqnum).build()
+        ack_packet_ip = IPPacket(src_ip, dst_ip, ack_packet_tcp).build()
+        sock.sendto(ack_packet_ip, (dst_ip, dst_port))
+        break
+    return (ip_id, seqnum, acknum, data_packet)
+
+def receive_instructions(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum, maxnum = 0):
+    ip_id = 0
+    counter = 0
+    while ip_id != 0xffff:
+        if maxnum > 0 and counter >= maxnum:
+            break
+        ip_id, seqnum, acknum, data = receive_and_acknowledge(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum, False)
+        print(data[40:].decode())
+        counter += 1
+    return (ip_id, seqnum, acknum, data)
+
+def left_packet(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum):
+    matr_mod = MAT_NR % 2**16
+    mat_nr_packet_tcp = TCPPacket(src_ip, src_port, dst_ip, dst_port, '', TCP_FLAGS_PSH + TCP_FLAGS_ACK, acknum, seqnum).build()
+    mat_nr_packet_ip = IPPacket(src_ip, dst_ip, mat_nr_packet_tcp, ip_id=matr_mod).build()
+    sock.sendto(mat_nr_packet_ip, (dst_ip, dst_port))
+
+def right_packet(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum):
+    rsv_packet_tcp = TCPPacket(src_ip, src_port, dst_ip, dst_port, '', TCP_FLAGS_PSH + TCP_FLAGS_ACK, acknum, seqnum, dofs=14).build()
+    rsv_packet_ip = IPPacket(src_ip, dst_ip, rsv_packet_tcp).build()
+    sock.sendto(rsv_packet_ip, (dst_ip, dst_port))
+
+def top_packet(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum):
+    payload = (0b111).to_bytes(1, byteorder='big')
+    packet_tcp = TCPPacket(src_ip, src_port, dst_ip, dst_port, payload, TCP_FLAGS_PSH + TCP_FLAGS_ACK, seqnum, acknum, raw=True).build()
+    packet_ip = IPPacket(src_ip, dst_ip, packet_tcp).build()
+    sock.sendto(packet_ip, (dst_ip, dst_port))
+
+def bottom_packet(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum):
+    payload = hashlib.md5('801005'.encode('utf-8')).digest()
+    packet_tcp = TCPPacket(src_ip, src_port, dst_ip, dst_port, payload, TCP_FLAGS_PSH + TCP_FLAGS_ACK, acknum, seqnum, raw=True).build()
+    packet_ip = IPPacket(src_ip, dst_ip, packet_tcp).build()
+    sock.sendto(packet_ip, (dst_ip, dst_port))
+    return acknum + len(payload)
+
 def tcp_send_and_receive(sock, src_ip, src_port, dst_ip, dst_port, tcp_seq):
     syn_packet_tcp = TCPPacket(src_ip, src_port, dst_ip, dst_port, '', TCP_FLAGS_SYN, tcp_seq).build()
     syn_packet_ip = IPPacket(src_ip, dst_ip, syn_packet_tcp).build()
     sock.sendto(syn_packet_ip, (dst_ip, dst_port))
 
-    syn_ack_packet = sock.recvfrom(2000)[0]
-    # sequence number is indices 24 to 28, ack number is indices 28 to 32 
-    seqnum_str = ''.join('%02x' % ord(c) for c in syn_ack_packet[24:28].decode())
-    seqnum = int(seqnum_str, base=16)
-    acknum_str = ''.join('%02x' % ord(c) for c in syn_ack_packet[28:32].decode())
-    acknum = int(acknum_str, base=16)
+    syn_ack_flag, seqnum, acknum, data_packet = receive_and_acknowledge(sock, src_ip, src_port, dst_ip, dst_port, 0, 0, True)
 
-    ack_packet_tcp = TCPPacket(src_ip, src_port, dst_ip, dst_port, '', TCP_FLAGS_ACK, acknum, seqnum+1).build()
-    ack_packet_ip = IPPacket(src_ip, dst_ip, ack_packet_tcp).build()
-    sock.sendto(ack_packet_ip, (dst_ip, dst_port))
+    ip_id, seqnum, acknum, data_packet = receive_instructions(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum)
 
-    # TODO interaction
-    # IP-ID of first packet [4:6] is synack code
-    # TCP_FLAG_PSH has to be set in matriculation number packet
+    mat_nr_packet_tcp = TCPPacket(src_ip, src_port, dst_ip, dst_port, '801005\r\n', TCP_FLAGS_PSH + TCP_FLAGS_ACK, acknum, seqnum).build()
+    mat_nr_packet_ip = IPPacket(src_ip, dst_ip, mat_nr_packet_tcp).build()
+    sock.sendto(mat_nr_packet_ip, (dst_ip, dst_port))
+    
+    ip_id, seqnum, acknum, data_packet = receive_instructions(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum, 2)
+    ip_id, seqnum, acknum, data_packet = receive_and_acknowledge(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum, False)
+    matriculation_flag = data_packet[40:].hex()
+
+    ip_id, seqnum, acknum, data_packet = receive_instructions(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum)
+
+    for _ in range(2):
+        acknum = bottom_packet(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum)
+        time.sleep(0.1)
+        
+    for _ in range(4):
+        right_packet(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum)
+        acknum += 1
+        time.sleep(0.1)
+
+    for _ in range(7):
+        acknum += 1
+        top_packet(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum)
+        time.sleep(0.1)
+    
+    for _ in range(3):
+        seqnum += 1
+        acknum += 1
+        left_packet(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum)
+        time.sleep(0.1)
+
+    # TODO problems with seq and ack numbers
 
     # TODO send FIN
-    #sequence_number_fin = tcp_seq # TODO sequence number mitzählen
+    #sequence_number_fin = seqnum
     #fin_packet_tcp = TCPPacket(src_ip, src_port, dst_ip, dst_port, '', TCP_FLAGS_FIN, sequence_number_fin).build()
     #fin_packet_ip = IPPacket(src_ip, dst_ip, fin_packet_tcp).build()
     #sock.sendto(fin_packet_ip, (dst_ip, dst_port))
 
     #TODO save flags
+    # save_flags(syn_ack_flag, matriculation_flag, fin_flag)
 
 
 parser = argparse.ArgumentParser ( description ='Super awesome TCP Client')
@@ -136,8 +227,3 @@ sock.setsockopt ( socket.IPPROTO_IP , socket.IP_HDRINCL , 1)
 sock.bind (( args.src_ip , args.src_port ))
 
 tcp_send_and_receive(sock, args.src_ip, args.src_port, args.dst_ip, args.dst_port, tcp_seq)
-
-# now you can send packets by sock.sendto ( packet_data , ( args.dst_ip , args.dst_port ))
-# receiving packets is simple as sock.recvfrom (2000)
-
-# packing packets is possible via struct.pack(format string, contents)
