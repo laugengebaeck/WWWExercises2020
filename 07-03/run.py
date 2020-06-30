@@ -207,7 +207,7 @@ def tcp_send_and_receive(sock, src_ip, src_port, dst_ip, dst_port, tcp_seq):
         seqnum = left_packet(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum)
         time.sleep(0.1)
 
-    ip_id, seqnum, acknum, data_packet = receive_instructions(sock, src_ip, src_port, dst_ip, dst_port, seqnum_before, acknum)
+    ip_id, seqnum, acknum, data_packet = receive_instructions(sock, src_ip, src_port, dst_ip, dst_port, seqnum_before, acknum, maxnum = 1)
 
     ip_id, seqnum, acknum, data_packet = receive_and_acknowledge(sock, src_ip, src_port, dst_ip, dst_port, seqnum, acknum, is_handshake = True, is_fin = True)
 
