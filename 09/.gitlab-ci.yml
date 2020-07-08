@@ -1,0 +1,110 @@
+image: lmmdock/build-environment
+
+stages:
+  - test
+  - build
+  - deployStaging
+  - deployProduction
+
+variables:
+  DOCKER_DRIVER: overlay2
+  GIT_SSH_COMMAND: "ssh -i .ssh/id_rsa -o UserKnownHostsFile=.ssh/known_hosts"
+
+before_script:
+  - mkdir -p build
+
+python-style:
+  stage: test
+  script:
+    - wget https://sre18.pages.rechenknecht.net/misc/pylintrc -O .pylintrc
+    - pip3 install -r requirements.txt
+    - pip3 install pylint
+    - pylint main.py app tests util
+
+python-test:
+  stage: test
+  script:
+    - pip3 install -r requirements.txt
+    - pip3 install coverage
+    - coverage run --branch --omit='tests/*','*/site-packages/*','*/dist-packages/*' -m unittest discover -p 'Test*.py'
+    - coverage html -d build/coverage
+    - coverage report
+  coverage: '/^TOTAL.*?(\d{1,3})%$/'
+  artifacts:
+    paths:
+      - build/coverage
+    expire_in: 1 week
+
+build-api-definition:
+  stage: build
+  image: node:10
+  script:
+    - yarn global add api2html
+    - mkdir -p build/api
+    - api2html docs/swagger.yml -o build/api/index.html
+  artifacts:
+    paths:
+      - build/api
+    expire_in: 1 week
+
+pages:
+  stage: deployProduction
+  script:
+    - mkdir -p public
+    - cp -av build/api public/api
+  only:
+    - master
+  dependencies:
+    - build-api-definition
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 week
+
+dockerImage-flask:
+  stage: build
+  services:
+    - docker:dind
+  variables:
+    DOCKER_ARTIFACT_TAG: "flask-training-api"
+  image: timnn/docker:latest
+  script:
+    - wget -O - https://bpdbsystel.pages.rechenknecht.net/ci-snippets/docker-scripts.tgz | tar xz
+    - ./docker-build.sh . "build/flask-training-api.gz"
+  dependencies: []
+  artifacts:
+    paths:
+      - build/flask-training-api.gz
+    expire_in: 1 day
+
+deploy-flask:staging:
+  image: lmmdock/build-environment
+  stage: deployStaging
+  script:
+    - deploy/init_ssh.sh
+    - wget https://raw.githubusercontent.com/lmm-git/temply/master/temply.sh
+    - source ./temply.sh
+    - declare -A templyParams
+    - templyParams[FLAVOR]="staging"
+    - templyParams[PORT]="3091"
+    - scp -i .ssh/id_rsa -o UserKnownHostsFile=.ssh/known_hosts build/flask-training-api.gz deploy@10.20.231.134:/tmp/flask-training-api.gz
+    - temply deploy/flask.sh templyParams | ssh -i .ssh/id_rsa -o UserKnownHostsFile=.ssh/known_hosts deploy@10.20.231.134 'bash -s'
+  dependencies:
+    - dockerImage-flask
+
+deploy-flask:production:
+  image: lmmdock/build-environment
+  stage: deployProduction
+  when: manual
+  script:
+    - deploy/init_ssh.sh
+    - wget https://raw.githubusercontent.com/lmm-git/temply/master/temply.sh
+    - source ./temply.sh
+    - declare -A templyParams
+    - templyParams[FLAVOR]="production"
+    - templyParams[PORT]="3081"
+    - scp -i .ssh/id_rsa -o UserKnownHostsFile=.ssh/known_hosts build/flask-training-api.gz deploy@10.20.231.134:/tmp/flask-training-api.gz
+    - temply deploy/flask.sh templyParams | ssh -i .ssh/id_rsa -o UserKnownHostsFile=.ssh/known_hosts deploy@10.20.231.134 'bash -s'
+  dependencies:
+    - dockerImage-flask
+

@@ -1,0 +1,8 @@
+Flask~=1.0
+peewee~=3.9.5
+flask_testing~=0.7.1
+https://lmm.pages.rechenknecht.net/flask-common/flask_common.tgz
+https://bpdbsystel.pages.rechenknecht.net/peewee-common/peewee_common.tgz
+lxml~=4.3.3
+raven[flask]~=6.10
+werkzeug==0.16.0
