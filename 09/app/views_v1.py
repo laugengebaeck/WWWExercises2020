@@ -2,7 +2,7 @@
 # pylint: disable=fixme
 
 # **It took me ? hours to solve this assignment.**
-# Solved by (Matrikelnummern): Person 1, Person 2
+# Solved by (Matrikelnummern): 801005, 801123
 
 
 import json
@@ -121,9 +121,9 @@ def update_image_storage():
     :return: json if successful or not
     """
 
-    # TODO get BASE_URL_DATASET, we would suggest requests for it (already installed) Think about error handling.
     answer = requests.get(BASE_URL_DATASET)
     # Error handling
+    answer.raise_for_status()
 
     # TODO Please explain what this line is doing. Why is it needed? In which case? (directly here as comment)
     with database_holder.database.transaction():
@@ -131,27 +131,18 @@ def update_image_storage():
         Image.delete().execute()  # pylint: disable=no-value-for-parameter
         Caption.delete().execute()  # pylint: disable=no-value-for-parameter
 
-        # TODO We encourage you to use the html.fromstring method provided by the lxml package (already installed).
-        tree = None
+        tree = html.fromstring(answer.text)
 
-        # TODO After parsing the XML tree, please use the xpath method to iterate over all elements
-        for pictureTree in tree.xpath(''):
-
-            # TODO get image src by xpath method, you can check lxml documentation or use a debugger to find attributes
-            src = None
-
-            # TODO parse category by appling a regex to src, probably check out regex101.com
-            # check out re docs of Python3
-            category = None
+        for pictureTree in tree.xpath('/html/body/table/tr'):
+            src = pictureTree.xpath('td/img/@src')[0]
+            category = re.match(r'(\w+)\/', src).group(1)
 
             # save Image in DB, nothing magical here
             imageDb = Image(src=src, category=category)
             imageDb.save()
 
-            # TODO iterate over all captions by using xpath method. Try to make the xpath expression as short as
-            # possible
-            for captionTree in []:
-                caption_text = ''
+            for captionTree in pictureTree.xpath('td//td'):
+                caption_text = captionTree.text[1:]
                 Caption(text=caption_text, image=imageDb).save()
 
     return json.dumps({'status': 'finished'}), 200
