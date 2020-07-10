@@ -1,7 +1,4 @@
-# Remove for testing with pylint ;)
-# pylint: disable=fixme
-
-# **It took me ? hours to solve this assignment.**
+# **It took me 3 hours to solve this assignment.**
 # Solved by (Matrikelnummern): 801005, 801123
 
 
@@ -69,12 +66,16 @@ def get_tasks():
 def get_answers():
     result = {
         'Is a REST API bound to a single exchange format like JSON? How can multiple formats be used? (1 Point)':
-            '',
+            'No, it isn\'t. Multiple formats like JSON or XML may be used by appending something like ?format=json as '
+            'a query option to the url or by using the HTTP Accept header. There is no real standard for doing that.',
         'Are all operations on this REST APIs idempotent? Explain why! (1 Point)':
-            '',
+            'REST APIs should make all operations idempotent where the HTTP verb is not POST.'
+            'POST requests cannot be idempotent since they insert new data and return the ID of'
+            'the newly created datapoint, which by definition needs to be unique',
         'Why could it be problematic to work with complete URLs (with protocol, hostname and path) as links? Name and '
         'explain two reasons (2 Points)': [
-            '',
+            'If you decide to use a new server (with another hostname), then all of your URLs would be invalid and '
+            'you would need to change them. The same goes for changing to another protocol.',
         ],
         'Hand in requirements (1 Point)': [
             'ZIP the complete source code directly from the root directory (so no useless subdirs in ZIP please)',
@@ -88,27 +89,52 @@ def get_answers():
         ]
     }
 
-    for key in result:
-        if key != 'Hand in requirements (1 Point)':
-            result[key] = '[Solution hidden] Hey, what are you searching? A solution? Tzz. ;)'
-
     return json.dumps(result), 200
 
 
-# TODO implement missing routes
-# You can request images from the database by executing something like
-# for image in Image.select().limit(limit).offset(offset):
-#     do something with the image
-#
-# To access captions, you need to access image.captions for a list of all caption object (more precisely a generator)
-#
-# For counting all images in DB you can use this command: Image.select().count()
-# If using pylint please add # pylint: disable=no-value-for-parameter to the end of the line.
-#
-# You can access GET arguments by request.args.get('key', 'default') where request is a global object defined by Flask
-#
-# For the bitmap route please proxy the image from the original source to your client. For this you can use this helper
-# method: `from flask_common.util import proxy`
+@V1.route('/images', methods=['GET'])
+def get_images():
+    # get options from request
+    # in case of invalid parameters return 400
+    try:
+        limit = int(request.args.get('limit', default='100'))
+        offset = int(request.args.get('offset', default='0'))
+    except ValueError:
+        return json.dumps({'message': 'Invalid limit or offset passed!'}), 400
+    if limit < 1 or limit > 500 or offset < 0:
+        return json.dumps({'message': 'Invalid limit or offset passed!'}), 400
+
+    count = Image.select().count()  # pylint: disable=no-value-for-parameter
+    image_dict = {'images': [], 'count': count}
+
+    # iterate over all images with given offset and limit
+    # wrap them into json and add them to the list
+    for image in Image.select().limit(limit).offset(offset):
+        image_json = get_image_json_object(image)
+        image_dict['images'].append(image_json)
+    return json.dumps(image_dict), 200
+
+
+@V1.route('/images/<int:imageid>', methods=['GET'])
+def get_image_by_id(imageid):
+    # select image with matching id and return 404 if no such image found
+    image = Image.select().where(Image.id == imageid)
+    if image.count() == 0:
+        return json.dumps({'message': 'No image with matching ID found!'}), 404
+    # wrap image object into JSON and return it
+    image_json = {'image': get_image_json_object(image[0])}
+    return json.dumps(image_json), 200
+
+
+@V1.route('/images/<int:imageid>/bitmap', methods=['GET'])
+def get_bitmap_by_id(imageid):
+    # select image with matching id and return 404 if no such image found
+    image = Image.select().where(Image.id == imageid)
+    if image.count() == 0:
+        return json.dumps({'message': 'No image with matching ID found!'}), 404
+    # forward request to image source using proxy
+    return proxy.stream(request, 'GET', BASE_URL_DATASET + image[0].src)
+
 
 @V1.route('/images/fetch', methods=['POST'])
 def update_image_storage():
@@ -125,7 +151,9 @@ def update_image_storage():
     # Error handling
     answer.raise_for_status()
 
-    # TODO Please explain what this line is doing. Why is it needed? In which case? (directly here as comment)
+    # This line starts a new transaction and automatically commits it at the end of the with-clause
+    # It is needed because database operations can fail. Then, the transaction would have to be aborted.
+    # The with-clause also takes care of this and issues a rollback.
     with database_holder.database.transaction():
         # Empty databases
         Image.delete().execute()  # pylint: disable=no-value-for-parameter
@@ -133,7 +161,9 @@ def update_image_storage():
 
         tree = html.fromstring(answer.text)
 
+        # for every picture (corresponds to tr)
         for pictureTree in tree.xpath('/html/body/table/tr'):
+            # get source and category
             src = pictureTree.xpath('td/img/@src')[0]
             category = re.match(r'(\w+)\/', src).group(1)
 
@@ -141,6 +171,7 @@ def update_image_storage():
             imageDb = Image(src=src, category=category)
             imageDb.save()
 
+            #  get all captions and save them
             for captionTree in pictureTree.xpath('td//td'):
                 caption_text = captionTree.text[1:]
                 Caption(text=caption_text, image=imageDb).save()
