@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Plain JavaScript implementation (8 Points)</title>
+</head>
+
+<body>
+    <h1>Image view</h1>
+    <p>
+        Matriculation number(s): 801123, 801005 <br>
+        It took me 1,0 hours to solve this assignment (only the plain version)<br>
+        You are not allowed to use any libraries. Please provide a working solution for the latest Firefox and Chrome
+        versions.<br>
+        You do not need to care about error handling for this task.
+    </p>
+    <h2>Task list</h2>
+    <ul>
+        <li>Add a form field to get an image id from the user to display (1 Point)</li>
+        <li>
+            Send a request to your API to get image metadata (or if it is not working, use our API at
+            <a
+                href="https://flask-training-api.www-technologien.marschke.me/">https://flask-training-api.www-technologien.marschke.me/</a>)
+            (1 Point image request with fetch, 1 Point json object generation)
+        </li>
+        <li>
+            Display result in table below (we added an example how the single entry should look like)
+            (0.5 Points replacing ID in table, 0.5 Points replacing src in Image, 2 Points replacing captions)
+        </li>
+        <li>Make use of the <code>API_URL</code> variable in your JavaScript code (1 Point)</li>
+        <li>Do not write "obfuscated" code ;) and fill out ? above. (1 Point)</li>
+    </ul>
+
+    <p>
+    <form onsubmit="return updateImage()">
+        <input id="image-id-input" type="number" value="1">
+        <button type="submit">Update</button>
+    </form>
+    </p>
+
+    <h2>Generated content</h2>
+    <div id="content">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Picture</th>
+                    <th>Captions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th id="image-id">1</th>
+                    <td><img id="image-image-tag"
+                            src="https://flask-training-api.www-technologien.marschke.me/v1/images/1/bitmap"
+                            alt="Image described by captions"></td>
+                    <td>
+                        <ul id="image-caption-list">
+                            <li>One jet lands at an airport while another takes off next to it.</li>
+                            <li>Two airplanes parked in an airport.</li>
+                            <li>Two jets taxi past each other.</li>
+                            <li>Two parked jet airplanes facing opposite directions.</li>
+                            <li>two passenger planes on a grassy plain</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        API_URL = 'http://localhost:5000'
+
+        /* Some implementation notes:
+
+        * You should check out fetch calls in JavaScript
+        * You can access DOM elements (like your form field) by document.getElementById('image-id-input')
+        * You can access properties of DOM elements by accessing them like document.getElementById('image-id-input').value
+        * You should check out the onsubmit event of the form tag
+
+        */
+
+        function updateImage() {
+            let idInput = document.getElementById("image-id-input");
+            let imgId = idInput.value;
+            document.getElementById("image-id").textContent = imgId
+            document.getElementById("image-image-tag").setAttribute("src", API_URL + "/v1/images/" + imgId + "/bitmap")
+            let captionList = document.getElementById("image-caption-list")
+            captionList.innerHTML = ""
+            fetch(API_URL + "/v1/images/" + imgId).then((result) => {
+                result = result.json().then((result) => {
+                    for (const id in result.image.captions) {
+                        let child = document.createElement("li")
+                        child.innerHTML = result.image.captions[id].text;
+                        captionList.appendChild(child)
+                    }
+                })
+            })
+
+            return false;
+        }
+    </script>
+</body>
+
+</html>
