@@ -1,7 +1,5 @@
 # WWW - Übungsblatt 6
 
-(Matrikelnummer: 801005)
-
 ## Teil I - Routing-Tabellen
 
 ### 1 - Dijkstra-Algorithmus

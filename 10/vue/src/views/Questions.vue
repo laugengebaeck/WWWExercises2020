@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!--- Matriculation number(s): 801123, 801005 -->
+    <!--- Matriculation number(s): ?, ? -->
     <!--- It took me 0,5 hours to solve the tasks in this file -->
     <div class="container">
       <h2>Questions & Answers</h2>

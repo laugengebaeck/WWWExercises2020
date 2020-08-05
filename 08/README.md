@@ -1,7 +1,5 @@
 # WWW - Übungsblatt 8
 
-(Matrikelnummern: 801005 und 801123)
-
 ## Teil 1 - DNS
 
 ### 1 - Iterative und rekursive Namensauflösung

@@ -1,5 +1,5 @@
 # WWW - Übung 3
-(Matrikelnummer: 801005)
+
 ## Teil 1
 ### 2 - JSON-Ausgabe
 Ja, die JSON-Ausgabe für die LZW-Komprimierung ist sinnvoll, da sie neben dem komprimierten String weitere wichtige Informationen enthält (die Länge eines Zeichens in Bits und das Anfangs-Wörterbuch), welche für die Dekodierung benötigt werden.

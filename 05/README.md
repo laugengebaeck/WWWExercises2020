@@ -1,5 +1,4 @@
 # WWW - Übung 5
-(Matrikelnummer: 801005)
 
 ## Teil 1 - Hamming-Code
 

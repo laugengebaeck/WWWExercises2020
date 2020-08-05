@@ -1,7 +1,5 @@
 # WWW - Übungsblatt 7
 
-(Matrikelnummern: 801005 und 801123)
-
 ## Teil I - TCP
 
 ### 1 - Handshake beim Verbindungsaufbau

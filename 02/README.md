@@ -1,5 +1,4 @@
 # Übung 1 - Teil 1: Textkodierung
-(Matrikelnummer: 801005)
 
 ## Aufgabe 1 - Fano-Bedingung
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!--- Matriculation number(s): 801123, 801005 -->
+    <!--- Matriculation number(s): ?, ? -->
     <!--- It took me 0,5 hours to solve the tasks in this file -->
     <!--- It took me 1 hours to set up the Vue application -->
     <div class="container">

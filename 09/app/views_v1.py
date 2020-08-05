@@ -1,5 +1,5 @@
 # **It took me 3 hours to solve this assignment.**
-# Solved by (Matrikelnummern): 801005, 801123
+# Solved by (Matrikelnummern): ?, ?
 
 
 import json

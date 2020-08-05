@@ -1,5 +1,4 @@
 # Übung 1 - Teil 2: Theoretische Grundlagen
-(Matrikelnummer: 801005)
 
 ## Aufgabe 1 - Internetstandards, Internetorganisationen
 
